@@ -1,5 +1,7 @@
 # leetcode-75
 
+[![Build Status](https://github.com/harshadnawathe/leetcode-75/actions/workflows/ci.yaml/badge.svg)](https://github.com/harshadnawathe/leetcode-75/actions/workflows/ci.yaml)
+
 Repository to practice leetcode problems from study plan [Leetcode 75](https://leetcode.com/studyplan/leetcode-75/).
 
 ## Requirements
