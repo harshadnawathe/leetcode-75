@@ -3,8 +3,6 @@ from typing import List
 
 class Solution:
     def reverseWords(self, s: str) -> str:
-        s = s.strip()
-
         chars = list(s)
 
         # Reverse order of words
@@ -12,34 +10,33 @@ class Solution:
 
         left, right = 0, 0
         while right < len(chars):
-            if chars[right] != " ":
-                right += 1
-                continue
-
-            self._reverse(chars, left, right)
-
             while (right < len(chars)) and (chars[right] == " "):
                 right += 1
 
             left = right
+            while (right < len(chars)) and (chars[right] != " "):
+                right += 1
 
-        self._reverse(chars, left, len(chars))
+            self._reverse(chars, left, right)
 
-        # Trim spaces between words
-        i, j, n = 0, 0, 0
-        while j < len(chars):
-            if chars[j] == " ":
-                n += 1
-            else:
-                n = 0
+        left, right = 0, 0
+        while right < len(chars):
+            while (right < len(chars)) and (chars[right] == " "):
+                right += 1
 
-            if chars[j] != " " or n == 1:
-                chars[i] = chars[j]
-                i += 1
+            while (right < len(chars)) and (chars[right] != " "):
+                chars[left] = chars[right]
+                left += 1
+                right += 1
 
-            j += 1
+            while (right < len(chars)) and (chars[right] == " "):
+                right += 1
 
-        chars = chars[:i]
+            if right < len(chars):
+                chars[left] = " "
+                left += 1
+
+        chars = chars[:left]
 
         return "".join(chars)
 
