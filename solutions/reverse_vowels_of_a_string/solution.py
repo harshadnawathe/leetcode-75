@@ -3,18 +3,17 @@ class Solution:
         chars = list(s)
         vowels = {"a", "e", "i", "o", "u", "A", "E", "I", "O", "U"}
 
-        left, right = 0, len(chars)
+        left, right = 0, len(chars) - 1
         while left < right:
-            if chars[left] not in vowels:
+            while left < right and chars[left] not in vowels:
                 left += 1
-                continue
 
-            right -= 1
-
-            while (left < right) and (chars[right] not in vowels):
+            while left < right and chars[right] not in vowels:
                 right -= 1
 
             chars[left], chars[right] = chars[right], chars[left]
+
             left += 1
+            right -= 1
 
         return "".join(chars)
