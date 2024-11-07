@@ -45,6 +45,11 @@ leetcode-75/
 └── README.md                       # Project-level README
 ```
 
+> [!NOTE]
+>
+> The project configures `Python3` the coding environment as mentioned
+> [here](https://support.leetcode.com/hc/en-us/articles/360011833974-What-are-the-environments-for-the-programming-languages)
+
 ### Package structure
 
 For each problem there is a separate package that contains,
@@ -52,6 +57,37 @@ For each problem there is a separate package that contains,
 - README file
 - Python source code
 - Python test code
+
+### Generating solution package
+
+The repository provides a simple Python [script](./leetcode.py) to
+generate a solution package for a given LeetCode problem URL.
+It extracts the problem name from the URL, converts it to snake case,
+and creates the following structure under the 'solutions/' directory:
+
+```txt
+solutions/<problem_snake_case>/
+├── __init__.py                # Empty file to mark as package
+├── solution.py                # Contains an initial Solution class
+├── test_solution.py           # Contains a sample test function for Solution
+└── README.md                  # Contains the problem description and link
+```
+
+Usage: `leetcode.py <leetcode_problem_url>`
+
+Example:
+
+```sh
+./leetcode.py "https://leetcode.com/problems/reverse-words-in-a-string/"
+```
+
+> [!TIP]
+>
+> For information about the script run,
+>
+> ```sh
+> ./leetcode.py help
+> ```
 
 ## Running tests
 
