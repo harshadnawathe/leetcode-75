@@ -100,5 +100,5 @@ pytest
 To run tests for a specific problem execute command below.
 
 ```sh
-pytest solutions/two_sum/test_solution.py
+pytest solutions/greatest_common_divisor_of_strings/
 ```
