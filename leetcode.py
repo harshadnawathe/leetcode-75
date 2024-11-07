@@ -11,7 +11,7 @@ def create_solution_package(url):
     parsed_url = urlparse(url)
     path_parts = parsed_url.path.strip("/").split("/")
 
-    if len(path_parts) < 3 or path_parts[0] != "problems":
+    if len(path_parts) < 2 or path_parts[0] != "problems":
         print(path_parts)
         print("Error: Invalid LeetCode URL format", file=sys.stderr)
         sys.exit(1)
