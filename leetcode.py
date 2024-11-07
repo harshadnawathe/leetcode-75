@@ -6,6 +6,29 @@ import sys
 from urllib.parse import urlparse, urlunparse
 
 
+def print_help():
+    help_message = """
+Usage: leetcode.py <leetcode_problem_url>
+
+This script creates a solution package for a given LeetCode problem URL.
+It extracts the problem name from the URL, converts it to snake case,
+and creates the following structure under the 'solutions/' directory:
+
+solutions/<problem_snake_case>/
+├── __init__.py                # Empty file to mark as package
+├── solution.py                # Contains an initial Solution class
+├── test_solution.py           # Contains a sample test function for Solution
+└── README.md                  # Contains the problem description and link
+
+Arguments:
+  leetcode_problem_url         The URL of the LeetCode problem
+
+Examples:
+  ./leetcode.py "https://leetcode.com/problems/reverse-words-in-a-string/"
+"""
+    print(help_message)
+
+
 def create_solution_package(url):
     # Step 1: Extract problem name from URL
     parsed_url = urlparse(url)
@@ -47,7 +70,7 @@ def test_{problem_snake_case}():
     solution = Solution()
 
     assert False
-    """
+"""
         f.write(test_content)
 
     # Step 7 & 8: Create a README file with the problem name and stripped URL
@@ -68,9 +91,9 @@ for the LeetCode problem statement.
 
 
 if __name__ == "__main__":
-    if len(sys.argv) < 2:
-        print("Error: Please provide a LeetCode problem URL.", file=sys.stderr)
-        sys.exit(1)
+    if len(sys.argv) < 2 or sys.argv[1] in {"-h", "--help", "help"}:
+        print_help()
+        sys.exit(0)
     else:
         try:
             create_solution_package(sys.argv[1])
