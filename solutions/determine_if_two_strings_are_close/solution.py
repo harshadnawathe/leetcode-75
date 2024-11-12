@@ -1,27 +1,15 @@
-from typing import List
+from collections import Counter
 
 
 class Solution:
     def closeStrings(self, word1: str, word2: str) -> bool:
-        if len(word1) != len(word2):
-            return False
+        cc1 = Counter(word1)
+        cc2 = Counter(word2)
 
-        cc1 = self.char_counts(word1)
-        cc2 = self.char_counts(word2)
+        keys1 = set(cc1.keys())
+        keys2 = set(cc2.keys())
 
-        for i in range(len(cc1)):
-            if (cc1[i] != cc2[i]) and (cc1[i] == 0 or cc2[i] == 0):
-                return False
+        sorted_vals1 = sorted(cc1.values())
+        sorted_vals2 = sorted(cc2.values())
 
-        cc1.sort()
-        cc2.sort()
-
-        return cc1 == cc2
-
-    def char_counts(self, s: str) -> List[int]:
-        counts = [0] * 26
-
-        for char in s:
-            counts[ord(char) - ord("a")] += 1
-
-        return counts
+        return sorted_vals1 == sorted_vals2 and keys1 == keys2
