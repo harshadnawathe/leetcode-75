@@ -65,8 +65,12 @@ def create_solution_package(url):
     test_file = os.path.join(package_dir, "test_solution.py")
     with open(test_file, "w") as f:
         test_content = f"""from solutions.{problem_snake_case}.solution import Solution
+tests = [
+    ("Example 1", {{"args": {{}}, "expected": None}}),
+]
 
-def test_{problem_snake_case}():
+
+def test_{problem_snake_case}(args, expected):
     solution = Solution()
 
     assert False
