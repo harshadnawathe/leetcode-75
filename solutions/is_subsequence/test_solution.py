@@ -1,8 +1,12 @@
 from solutions.is_subsequence.solution import Solution
 
+tests = [
+    ("Example 1", {"args": {"s": "abc", "t": "ahbgdc"}, "expected": True}),
+    ("Example 2", {"args": {"s": "axc", "t": "ahbgdc"}, "expected": False}),
+]
 
-def test_is_subsequence():
+
+def test_is_subsequence(args, expected):
     solution = Solution()
 
-    assert solution.isSubsequence(s="abc", t="ahbgdc") is True
-    assert solution.isSubsequence(s="axc", t="ahbgdc") is False
+    assert solution.isSubsequence(**args) == expected

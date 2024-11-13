@@ -1,16 +1,24 @@
-from typing import List
 from solutions.unique_number_of_occurrences.solution import Solution
-import pytest
 
 tests = [
-    ([1, 2, 2, 1, 1, 3], True),
-    ([1, 2], False),
-    ([-3, 0, 1, -3, 1, 1, 1, -3, 10, 0], True),
+    ("Example 1", {"args": {"arr": [1, 2, 2, 1, 1, 3]}, "expected": True}),
+    (
+        "Example 2",
+        {
+            "args": {
+                "arr": [1, 2],
+            },
+            "expected": False,
+        },
+    ),
+    (
+        "Example 3",
+        {"args": {"arr": [-3, 0, 1, -3, 1, 1, 1, -3, 10, 0]}, "expected": True},
+    ),
 ]
 
 
-@pytest.mark.parametrize("arr,is_uniq", tests)
-def test_unique_number_of_occurrences(arr: List[int], is_uniq: bool):
+def test_unique_number_of_occurrences(args, expected):
     solution = Solution()
 
-    assert solution.uniqueOccurrences(arr) == is_uniq
+    assert solution.uniqueOccurrences(**args) == expected

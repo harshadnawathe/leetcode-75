@@ -26,16 +26,3 @@ def test_equal_row_and_column_pairs(expected, args):
     solution = Solution()
 
     assert solution.equalPairs(**args) == expected
-
-
-def pytest_generate_tests(metafunc):
-    idlist = []
-    argvalues = []
-    argnames = []
-    for test in tests:
-        idlist.append(test[0])
-        params = test[1]
-        argnames = params.keys()
-        argvalues.append(params.values())
-
-    metafunc.parametrize(argnames, argvalues, ids=idlist)

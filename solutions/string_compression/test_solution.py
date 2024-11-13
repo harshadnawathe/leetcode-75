@@ -1,20 +1,52 @@
 from solutions.string_compression.solution import Solution
-from typing import List
+
+tests = [
+    (
+        "Example 1",
+        {
+            "args": {"chars": ["a", "a", "b", "b", "c", "c", "c"]},
+            "expected": {
+                "compressed_len": 6,
+                "compressed": ["a", "2", "b", "2", "c", "3"],
+            },
+        },
+    ),
+    (
+        "Example 2",
+        {
+            "args": {"chars": ["a"]},
+            "expected": {"compressed_len": 1, "compressed": ["a"]},
+        },
+    ),
+    (
+        "Example 3",
+        {
+            "args": {
+                "chars": [
+                    "a",
+                    "b",
+                    "b",
+                    "b",
+                    "b",
+                    "b",
+                    "b",
+                    "b",
+                    "b",
+                    "b",
+                    "b",
+                    "b",
+                    "b",
+                ]
+            },
+            "expected": {"compressed_len": 4, "compressed": ["a", "b", "1", "2"]},
+        },
+    ),
+]
 
 
-def test_string_compression():
+def test_string_compression(args, expected):
     solution = Solution()
 
-    def test_compress(list: List[str], compressed_len: int, compressed: List[str]):
-        assert solution.compress(list) == compressed_len
-        assert list[:compressed_len] == compressed
-
-    test_compress(
-        ["a", "a", "b", "b", "c", "c", "c"], 6, ["a", "2", "b", "2", "c", "3"]
-    )
-    test_compress(["a"], 1, ["a"])
-    test_compress(
-        ["a", "b", "b", "b", "b", "b", "b", "b", "b", "b", "b", "b", "b"],
-        4,
-        ["a", "b", "1", "2"],
-    )
+    compressed_len = expected["compressed_len"]
+    assert solution.compress(**args) == compressed_len
+    assert args["chars"][:compressed_len] == expected["compressed"]

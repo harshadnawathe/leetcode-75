@@ -1,13 +1,14 @@
-from typing import List
 from solutions.move_zeroes.solution import Solution
 
+tests = [
+    ("Example 1", {"args": {"nums": [0, 1, 0, 3, 12]}, "expected": [1, 3, 12, 0, 0]}),
+    ("Example 2", {"args": {"nums": [0]}, "expected": [0]}),
+]
 
-def test_move_zeroes():
+
+def test_move_zeroes(args, expected):
     solution = Solution()
 
-    def test(list: List[int], want: List[int]):
-        solution.moveZeroes(list)
-        assert list == want
+    solution.moveZeroes(**args)
 
-    test([0, 1, 0, 3, 12], [1, 3, 12, 0, 0])
-    test([0], [0])
+    assert args["nums"] == expected

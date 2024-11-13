@@ -1,17 +1,24 @@
 from solutions.determine_if_two_strings_are_close.solution import Solution
-import pytest
 
 tests = [
-    ("abc", "bca", True),
-    ("a", "aa", False),
-    ("cabbba", "abbccc", True),
-    ("uau", "ssx", False),
-    ("aaabbbbccddeeeeefffff", "aaaaabbcccdddeeeeffff", False),
+    ("Example 1", {"args": {"word1": "abc", "word2": "bca"}, "expected": True}),
+    ("Example 2", {"args": {"word1": "a", "word2": "aa"}, "expected": False}),
+    ("Example 3", {"args": {"word1": "cabbba", "word2": "abbccc"}, "expected": True}),
+    ("Example 4", {"args": {"word1": "uau", "word2": "ssx"}, "expected": False}),
+    (
+        "Example 5",
+        {
+            "args": {
+                "word1": "aaabbbbccddeeeeefffff",
+                "word2": "aaaaabbcccdddeeeeffff",
+            },
+            "expected": False,
+        },
+    ),
 ]
 
 
-@pytest.mark.parametrize("word1, word2, want", tests)
-def test_determine_if_two_strings_are_close(word1: str, word2: str, want: bool):
+def test_determine_if_two_strings_are_close(args, expected):
     solution = Solution()
 
-    assert solution.closeStrings(word1, word2) == want
+    assert solution.closeStrings(**args) == expected
