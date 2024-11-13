@@ -11,12 +11,11 @@ class Solution:
                 if diff < 0:
                     stack.pop()
                 elif diff > 0:
-                    asteroid = 0
+                    break
                 else:
                     stack.pop()
-                    asteroid = 0
-
-            if asteroid:
+                    break
+            else:
                 stack.append(asteroid)
 
         return stack
