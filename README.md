@@ -89,7 +89,48 @@ Example:
 > ./leetcode.py help
 > ```
 
-## Running tests
+## Tests
+
+Tests are written in table-driven style.
+
+An example test code is given below,
+
+```python
+# imports omitted for brevity
+
+# The list of tests to be executed
+tests = [
+    (                        # Test case
+      "Example 1",           # Test identifier - must be a string or int
+      {
+        "args": {            # Arguments passed to the function under test
+                             # `args` value is passed to test driver.
+          "str1": "ABCABC",  # key must be equal to the parameter name
+          "str2": "ABC"
+        },
+        "expected": "ABC"    # Expected result to verified against the actual
+                             # `expected` value is passed to test driver.
+      },
+    ),
+    ("Example 2", {"args": {"str1": "ABABAB", "str2": "ABAB"}, "expected": "AB"}),
+    ("Example 3", {"args": {"str1": "LEET", "str2": "CODE"}, "expected": ""}),
+]
+
+# Test driver function that runs for the each test defines in the tests with
+# corresponding values of `args` and `expected`
+def test_greatest_common_divisor_of_strings(args, expected):
+    solution = Solution()
+
+    assert solution.gcdOfStrings(**args) == expected
+```
+
+> [!NOTE]
+>
+> - The `pytest_generate_tests` [hook](./conftest.py) will
+>   parameterise the test function for each of the test case defined in the list.
+> - If the `tests` variable is not found then `pytest` will issue a warning.
+
+### Running tests
 
 To run all tests execute command below.
 
