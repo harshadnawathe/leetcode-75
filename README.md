@@ -58,7 +58,7 @@ For each problem there is a separate package that contains,
 - Python source code
 - Python test code
 
-### Generating solution package
+#### Generating solution package
 
 The repository provides a simple Python [script](./leetcode.py) to
 generate a solution package for a given LeetCode problem URL.
