@@ -8,12 +8,12 @@ class ListNode:
     next: Optional["ListNode"] = None
 
     @classmethod
-    def from_vals(cls, values: Iterable) -> Optional["ListNode"]:
+    def from_vals(cls, vals: Iterable) -> Optional["ListNode"]:
         anchor = cls()
 
         node = anchor
-        for value in values:
-            node.next = cls(value)
+        for val in vals:
+            node.next = cls(val)
             node = node.next
 
         return anchor.next
