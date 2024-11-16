@@ -8,7 +8,7 @@ class ListNode:
     next: Optional["ListNode"] = None
 
     @classmethod
-    def from_values(cls, values: Iterable) -> Optional["ListNode"]:
+    def from_vals(cls, values: Iterable) -> Optional["ListNode"]:
         anchor = cls()
 
         node = anchor

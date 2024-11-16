@@ -5,21 +5,21 @@ tests = [
     (
         "Example 1",
         {
-            "args": {"head": ListNode.from_values([5, 4, 2, 1])},
+            "args": {"head": ListNode.from_vals([5, 4, 2, 1])},
             "expected": 6,
         },
     ),
     (
         "Example 2",
         {
-            "args": {"head": ListNode.from_values([4, 2, 2, 3])},
+            "args": {"head": ListNode.from_vals([4, 2, 2, 3])},
             "expected": 7,
         },
     ),
     (
         "Example 3",
         {
-            "args": {"head": ListNode.from_values([1, 100000])},
+            "args": {"head": ListNode.from_vals([1, 100000])},
             "expected": 100001,
         },
     ),

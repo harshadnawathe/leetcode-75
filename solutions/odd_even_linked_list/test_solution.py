@@ -5,15 +5,15 @@ tests = [
     (
         "Example 1",
         {
-            "args": {"head": ListNode.from_values([1, 2, 3, 4, 5])},
-            "expected": ListNode.from_values([1, 3, 5, 2, 4]),
+            "args": {"head": ListNode.from_vals([1, 2, 3, 4, 5])},
+            "expected": ListNode.from_vals([1, 3, 5, 2, 4]),
         },
     ),
     (
         "Example 2",
         {
-            "args": {"head": ListNode.from_values([2, 1, 3, 5, 6, 4, 7])},
-            "expected": ListNode.from_values([2, 3, 6, 7, 1, 5, 4]),
+            "args": {"head": ListNode.from_vals([2, 1, 3, 5, 6, 4, 7])},
+            "expected": ListNode.from_vals([2, 3, 6, 7, 1, 5, 4]),
         },
     ),
 ]
