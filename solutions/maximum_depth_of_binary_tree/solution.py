@@ -4,19 +4,17 @@ from typing import Optional
 
 class Solution:
     def maxDepth(self, root: Optional[TreeNode]) -> int:
-        max_depth = 0
-        nodes = [root] if root is not None else []
+        if not root:
+            return 0
 
+        nodes = [root]
+
+        max_depth = 0
         while nodes:
             max_depth += 1
 
-            for _ in range(len(nodes)):
-                node = nodes.pop(0)
-
-                if node.left is not None:
-                    nodes.append(node.left)
-
-                if node.right is not None:
-                    nodes.append(node.right)
+            nodes = [
+                child for node in nodes for child in (node.left, node.right) if child
+            ]
 
         return max_depth
