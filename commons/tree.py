@@ -1,12 +1,16 @@
-from dataclasses import dataclass
 from typing import Iterable, Optional
 
 
-@dataclass
 class TreeNode:
-    val: int = 0
-    left: Optional["TreeNode"] = None
-    right: Optional["TreeNode"] = None
+    def __init__(
+        self,
+        val: int,
+        left: Optional["TreeNode"] = None,
+        right: Optional["TreeNode"] = None,
+    ):
+        self.val = val
+        self.left = left
+        self.right = right
 
     @classmethod
     def from_vals(cls, vals: Iterable[Optional[int]]) -> Optional["TreeNode"]:
