@@ -1,58 +1,41 @@
-from collections import deque
+from collections import deque, namedtuple
 from typing import Deque, Dict, Optional, Tuple
 
 from commons.tree import TreeNode
 
-
-class TreeNodeInfo:
-    def __init__(self, parent: Optional[TreeNode], depth: int):
-        self.parent = parent
-        self.depth = depth
+TreeNodeInfo = namedtuple("TreeNodeInfo", ["parent", "depth"])
 
 
 class Solution:
     def lowestCommonAncestor(
         self, root: "TreeNode", p: "TreeNode", q: "TreeNode"
     ) -> "TreeNode":
-        tree_node_info = self.get_tree_node_info(root)
+        tree_info = self._build_tree_info(root)
 
-        while tree_node_info[p].depth > tree_node_info[q].depth:
-            parent = tree_node_info[p].parent
-            assert parent is not None
-            p = parent
+        # Bring p and q to the same depth
+        while tree_info[p].depth > tree_info[q].depth:
+            p = tree_info[p].parent
+        while tree_info[q].depth > tree_info[p].depth:
+            q = tree_info[q].parent
 
-        while tree_node_info[q].depth > tree_node_info[p].depth:
-            parent = tree_node_info[q].parent
-            assert parent is not None
-            q = parent
-
-        while p is not q:
-            p_parent = tree_node_info[p].parent
-            assert p_parent is not None
-            p = p_parent
-
-            q_parent = tree_node_info[q].parent
-            assert q_parent is not None
-            q = q_parent
+        # Find the common ancestor
+        while p != q:
+            p, q = tree_info[p].parent, tree_info[q].parent
 
         return p
 
-    def get_tree_node_info(self, root: TreeNode) -> Dict[TreeNode, TreeNodeInfo]:
-        tree_node_info = dict()
-
-        nodes: Deque[Tuple[TreeNode, Optional[TreeNode], int]] = deque(
+    def _build_tree_info(self, root: "TreeNode") -> Dict["TreeNode", TreeNodeInfo]:
+        tree_info = {}
+        queue: Deque[Tuple[TreeNode, Optional[TreeNode], int]] = deque(
             [(root, None, 0)]
         )
 
-        while nodes:
-            node, parent, depth = nodes.popleft()
+        while queue:
+            node, parent, depth = queue.popleft()
+            tree_info[node] = TreeNodeInfo(parent, depth)
 
-            tree_node_info[node] = TreeNodeInfo(parent, depth)
+            queue.extend(
+                (child, node, depth + 1) for child in (node.left, node.right) if child
+            )
 
-            if node.left is not None:
-                nodes.append((node.left, node, depth + 1))
-
-            if node.right is not None:
-                nodes.append((node.right, node, depth + 1))
-
-        return tree_node_info
+        return tree_info
