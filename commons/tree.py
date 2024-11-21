@@ -1,4 +1,4 @@
-from typing import Iterable, Optional
+from typing import Iterable, List, Optional
 
 
 class TreeNode:
@@ -12,62 +12,51 @@ class TreeNode:
         self.left = left
         self.right = right
 
+    def __eq__(self, other: object) -> bool:
+        if not isinstance(other, TreeNode):
+            return NotImplemented
+        return (
+            self.val == other.val
+            and self.left == other.left
+            and self.right == other.right
+        )
+
+    def __hash__(self) -> int:
+        return hash((self.val, self.left, self.right))
+
     def get_node_with_val(self, val: int) -> Optional["TreeNode"]:
-        nodes: list[TreeNode] = [self]
-
-        while nodes:
-            node = nodes.pop(0)
-
+        queue: List[TreeNode] = [self]
+        while queue:
+            node = queue.pop(0)
             if node.val == val:
                 return node
-
-            if node.left is not None:
-                nodes.append(node.left)
-
-            if node.right is not None:
-                nodes.append(node.right)
-
+            if node.left:
+                queue.append(node.left)
+            if node.right:
+                queue.append(node.right)
         return None
 
     @classmethod
     def from_vals(cls, vals: Iterable[Optional[int]]) -> Optional["TreeNode"]:
         vals_iter = iter(vals)
-
-        def next_val():
-            try:
-                val = next(vals_iter)
-                return val, False
-            except StopIteration:
-                return None, True
-
-        root_val, stop = next_val()
-
-        if stop or root_val is None:
+        root_val = next(vals_iter, None)
+        if root_val is None:
             return None
 
-        root = TreeNode(root_val)
+        root = cls(root_val)
+        queue = [root]
 
-        nodes = [root]
-
-        while True:
-            node = nodes.pop(0)
-
-            val, stop = next_val()
-
-            if stop:
-                break
-
+        for val in vals_iter:
+            node = queue.pop(0)
             if val is not None:
-                node.left = TreeNode(val)
-                nodes.append(node.left)
-
-            val, stop = next_val()
-
-            if stop:
+                node.left = cls(val)
+                queue.append(node.left)
+            try:
+                val = next(vals_iter)
+                if val is not None:
+                    node.right = cls(val)
+                    queue.append(node.right)
+            except StopIteration:
                 break
-
-            if val is not None:
-                node.right = TreeNode(val)
-                nodes.append(node.right)
 
         return root
