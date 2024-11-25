@@ -1,10 +1,9 @@
-from collections import defaultdict
-from typing import DefaultDict, List, Tuple
+from typing import List, Tuple
 
 
 class Solution:
     def minReorder(self, n: int, connections: List[List[int]]) -> int:
-        graph = self._adjacency_list(connections)
+        graph = self._build_graph(n, connections)
 
         count_reordered = 0
 
@@ -20,17 +19,13 @@ class Solution:
 
         return count_reordered
 
-    def _adjacency_list(
-        self, connections: List[List[int]]
-    ) -> DefaultDict[int, List[Tuple[int, bool]]]:
-        graph: DefaultDict[int, List[Tuple[int, bool]]] = defaultdict(list)
+    def _build_graph(
+        self, n: int, connections: List[List[int]]
+    ) -> List[List[Tuple[int, bool]]]:
+        graph = [[] for _ in range(n)]
 
         for src, dst in connections:
-            graph[src].append(
-                (dst, True)
-            )  # As the road is present - we may need to reorder it
-            graph[dst].append(
-                (src, False)
-            )  # As the road is present - no need to reorder it
+            graph[src].append((dst, True))  # Need reorder as road is present
+            graph[dst].append((src, False))  # No reorder
 
         return graph
