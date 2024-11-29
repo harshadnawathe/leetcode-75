@@ -6,13 +6,9 @@ class Solution:
     def successfulPairs(
         self, spells: List[int], potions: List[int], success: int
     ) -> List[int]:
-        potions = sorted(potions)
+        potions.sort()
 
-        result = [0] * len(spells)
-
-        for i, spell in enumerate(spells):
-            result[i] = len(potions) - bisect_left(
-                potions, success, key=lambda potion: potion * spell
-            )
-
-        return result
+        return [
+            len(potions) - bisect_left(potions, success, key=lambda p: p * s)
+            for s in spells
+        ]
