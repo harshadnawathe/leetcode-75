@@ -1,6 +1,3 @@
-from typing import Optional
-
-
 class MethodInvoker:
     """Handles method invocation on a target class instance based on method names."""
 
@@ -8,7 +5,7 @@ class MethodInvoker:
         self.target_class = target_class
         self.instance = None
 
-    def call(self, method_name: str, args) -> Optional[int]:
+    def call(self, method_name: str, args):
         """
         Invokes the specified method with given arguments.
         Handles constructor calls by creating a new instance.
