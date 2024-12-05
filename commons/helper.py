@@ -1,3 +1,7 @@
+from typing import Any, List
+from itertools import starmap
+
+
 class MethodInvoker:
     """Handles method invocation on a target class instance based on method names."""
 
@@ -19,3 +23,6 @@ class MethodInvoker:
 
         method = getattr(self.instance, method_name)
         return method(*args)
+
+    def invoke_all(self, method_names: List[str], args: List[List[Any]]):
+        return list(starmap(self.invoke, zip(method_names, args)))

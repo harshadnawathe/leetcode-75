@@ -1,4 +1,3 @@
-from itertools import starmap
 from typing import Any, List
 
 from commons.helper import MethodInvoker
@@ -51,4 +50,4 @@ def test_smallest_number_in_infinite_set(
 ):
     invoker = MethodInvoker(SmallestInfiniteSet)
 
-    assert list(starmap(invoker.invoke, zip(calls, args))) == expected
+    assert invoker.invoke_all(calls, args) == expected
