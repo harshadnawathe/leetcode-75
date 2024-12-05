@@ -1,13 +1,10 @@
 class Solution:
     def minDistance(self, word1: str, word2: str) -> int:
         m, n = len(word1), len(word2)
-        md = [[0] * (n + 1) for _ in range(m + 1)]
-
-        for c in range(1, n + 1):
-            md[0][c] = c
-
-        for r in range(1, m + 1):
-            md[r][0] = r
+        md = [
+            [r + c if r == 0 or c == 0 else 0 for c in range(n + 1)]
+            for r in range(m + 1)
+        ]
 
         for r in range(1, m + 1):
             for c in range(1, n + 1):
