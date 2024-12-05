@@ -5,7 +5,7 @@ class MethodInvoker:
         self.target_class = target_class
         self.instance = None
 
-    def call(self, method_name: str, args):
+    def invoke(self, method_name: str, args):
         """
         Invokes the specified method with given arguments.
         Handles constructor calls by creating a new instance.

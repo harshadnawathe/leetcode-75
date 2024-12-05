@@ -51,4 +51,4 @@ def test_smallest_number_in_infinite_set(
 ):
     invoker = MethodInvoker(SmallestInfiniteSet)
 
-    assert list(starmap(invoker.call, zip(calls, args))) == expected
+    assert list(starmap(invoker.invoke, zip(calls, args))) == expected

@@ -24,4 +24,4 @@ tests = [
 def test_number_of_recent_calls(calls: List[str], args: List[List[Any]], expected):
     invoker = MethodInvoker(RecentCounter)
 
-    assert list(starmap(invoker.call, zip(calls, args))) == expected
+    assert list(starmap(invoker.invoke, zip(calls, args))) == expected
