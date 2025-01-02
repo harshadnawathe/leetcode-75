@@ -1,23 +1,11 @@
-from itertools import starmap, accumulate
-from operator import add
+from itertools import accumulate
 
 
 class Solution:
     def maxScore(self, s: str) -> int:
-        def is_zero(c):
-            return c == "0"
+        zeros = list(accumulate(1 if c == "0" else 0 for c in s[:-1]))
 
-        def is_one(c):
-            return c == "1"
+        ones = list(accumulate(1 if c == "1" else 0 for c in reversed(s[1:])))
+        ones.reverse()
 
-        return max(
-            starmap(
-                add,
-                zip(
-                    list(accumulate(map(is_zero, s[:-1]), add)) + [0],
-                    reversed(
-                        list(accumulate(map(is_one, reversed(s[1:])), add, initial=0))
-                    ),
-                ),
-            )
-        )
+        return max(z + o for z, o in zip(zeros, ones))
