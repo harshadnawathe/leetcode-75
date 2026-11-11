@@ -1,3 +1,8 @@
+[tools]
+# The pin that used to live in .python-version. CI reads the same constraint
+# from the `requires-python` key in pyproject.toml.
+python = "3.14"
+
 [env]
 _.python.venv = { path = ".venv", create = true }
 DISABLE_CODEIUM=1

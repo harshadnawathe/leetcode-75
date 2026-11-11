@@ -6,14 +6,17 @@ Repository to practice leetcode problems from study plan [Leetcode 75](https://l
 
 ## Requirements
 
-Python@3.11
+Python@3.14
 
 > [!TIP]
-> Refer to [mise](https://mise.jdx.dev/) [file](./.mise.toml) for exact version.
+> The version is declared once as `requires-python` in
+> [pyproject.toml](./pyproject.toml), which the CI workflow reads. The
+> [mise](https://mise.jdx.dev/) [file](./.mise.toml) pins the same version for
+> local development.
 
 ## Setup
 
-With the assumption that you are in a Python 3.11 virtual environment, run:
+With the assumption that you are in a Python 3.14 virtual environment, run:
 
 ```sh
 pip install -r requirements.txt
@@ -40,6 +43,7 @@ leetcode-75/
 │   │   ├── test_solution.py
 │   │   └── README.md
 │   └── ...                         # Additional problem directories
+├── pyproject.toml                  # Project and tool configuration
 ├── requirements.txt                # Project dependencies
 ├── requirements-dev.txt            # Project dev dependencies (pytest, etc.)
 └── README.md                       # Project-level README

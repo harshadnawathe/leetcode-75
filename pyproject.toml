@@ -1,0 +1,8 @@
+[project]
+name = "leetcode-75"
+version = "0.1.0"
+description = "Solutions for the LeetCode 75 study plan"
+# The CI workflow reads the interpreter version from here. Pinned to the 3.14
+# series rather than left open ended, so a new Python release cannot change
+# what the build runs on without a commit.
+requires-python = ">=3.14,<3.15"
