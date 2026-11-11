@@ -61,25 +61,51 @@ For each problem there is a separate package that contains,
 #### Generating solution package
 
 The repository provides a simple Python [script](./leetcode.py) to
-generate a solution package for a given LeetCode problem URL.
-It extracts the problem name from the URL, converts it to snake case,
-and creates the following structure under the 'solutions/' directory:
+generate a solution package for a given LeetCode problem.
+It reads the problem from the LeetCode GraphQL api, converts the title slug
+to snake case, and creates the following structure under the 'solutions/'
+directory:
 
 ```txt
 solutions/<problem_snake_case>/
 ├── __init__.py                # Empty file to mark as package
-├── solution.py                # Contains an initial Solution class
-├── test_solution.py           # Contains a sample test function for Solution
-└── README.md                  # Contains the problem description and link
+├── solution.py                # The Python3 code snippet from LeetCode
+├── test_solution.py           # A table driven test for the snippet signature
+└── README.md                  # Contains the problem name and link
 ```
 
-Usage: `leetcode.py <leetcode_problem_url>`
+Usage: `leetcode.py <leetcode_problem_url|title_slug>`
 
 Example:
 
 ```sh
 ./leetcode.py "https://leetcode.com/problems/reverse-words-in-a-string/"
+./leetcode.py reverse-words-in-a-string
 ```
+
+The generated `test_solution.py` mirrors the signature found in
+`solution.py`: a single call on a `Solution` instance for most problems, and
+a [`MethodInvoker`](./commons/helper.py) driven list of calls for design
+problems. Every value to be filled in from the problem examples is written as
+`...`, which also keeps the scaffolded test red until it is completed.
+
+> [!NOTE]
+>
+> The script degrades rather than giving up, so a problem can be scaffolded
+> even when a precondition does not hold:
+>
+> - Files that already exist are kept, so the script can be rerun on a half
+>   done problem to fill in the gaps without touching solved code.
+> - When LeetCode cannot be reached, a bare title slug is enough to write the
+>   package, with the code snippet left as a `TODO`.
+> - A premium problem, or one without a Python3 snippet, still gets its
+>   README and test skeleton.
+> - When no solution signature can be parsed, a generic test skeleton is
+>   written instead.
+>
+> Everything that could not be fetched or parsed is reported on stderr. The
+> only fatal errors are the ones that leave the script without a directory to
+> write into.
 
 > [!TIP]
 >
