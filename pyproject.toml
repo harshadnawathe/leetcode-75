@@ -6,3 +6,13 @@ description = "Solutions for the LeetCode 75 study plan"
 # series rather than left open ended, so a new Python release cannot change
 # what the build runs on without a commit.
 requires-python = ">=3.14,<3.15"
+
+[tool.basedpyright]
+# basedpyright defaults to its strictest mode, which buries real errors under
+# `reportAny` noise from json payloads and the untyped `tests` tables. Pyright's
+# standard mode keeps the errors that matter here: wrong types, bad attributes
+# and unresolved imports.
+typeCheckingMode = "standard"
+
+venvPath = "."
+venv = ".venv"
