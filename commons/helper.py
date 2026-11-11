@@ -15,7 +15,7 @@ class MethodInvoker:
         Handles constructor calls by creating a new instance.
         """
         if method_name == self.target_class.__name__:
-            self.instance = self.target_class()
+            self.instance = self.target_class(*args)
             return None
 
         if not hasattr(self.instance, method_name):
